@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Prolific</string>
+    <string name="screen1">Books</string>
+    <string name="screen3">Detail</string>
+
+    <string name="action_add">Add</string>
+    <string name="action_seed">Seed</string>
+    <string name="action_done">Done</string>
+
+
+</resources>

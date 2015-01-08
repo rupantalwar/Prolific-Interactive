@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <!-- Add -->
+    <item android:id="@+id/action_add"
+        android:title="@string/action_add"
+        android:showAsAction="never"/>
+
+    <!-- Seed -->
+    <item android:id="@+id/action_seed"
+        android:title="@string/action_seed"
+        android:showAsAction="never" />
+</menu>
