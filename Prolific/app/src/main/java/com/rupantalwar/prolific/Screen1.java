@@ -34,8 +34,8 @@ public class Screen1 extends Activity {
 
         booksList = (ListView) findViewById(R.id.bookList);
 
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X"
+        String[] values = new String[] { "Book1", "Book2", "Book3",
+                "Book4", "Book5"
                  };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -43,7 +43,7 @@ public class Screen1 extends Activity {
         booksList.setAdapter(adapter);
 
 
-        load(getApp());
+       // load(getApp());
 
     }
 
@@ -52,7 +52,7 @@ public class Screen1 extends Activity {
         return (MyService) getApplication();
     }
 
-    public void load(MyService ser){
+  /*  public void load(MyService ser){
 
     MyApi myApi= ser.getBooks();
         myApi.listBooks(new Callback<List<String>>() {
@@ -75,7 +75,7 @@ public class Screen1 extends Activity {
             }
         });
 
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
