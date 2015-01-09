@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/book_details_title"
+        android:textStyle="bold"
+        android:text="Title"
+        android:textColor="#000000"
+        android:textSize="30sp"
+         />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/book_details_title"
+        android:layout_marginTop="20dp"
+        android:lines="2"
+        android:id="@+id/book_details_author"
+        android:text="Author"
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/book_details_author"
+        android:lines="2"
+        android:id="@+id/book_details_pub"
+        android:text="Publisher"
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/book_details_pub"
+        android:lines="2"
+        android:id="@+id/book_details_tag"
+        android:text="Tags"
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/book_details_tag"
+        android:lines="2"
+        android:id="@+id/book_details_chk"
+        android:text="Last Checked Out:"
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/book_details_chk"
+        android:layout_alignBaseline="@id/book_details_chk"
+        android:lines="2"
+        android:id="@+id/book_details_date"
+        android:text="  \@Date:"
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="10sp" />
+
+    <Button
+        android:id="@+id/checkout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Checkout"
+        android:fontFamily="Arial"
+        android:textColor="@color/black"
+        android:layout_below="@+id/book_details_chk"
+         />
+
+
+</RelativeLayout>

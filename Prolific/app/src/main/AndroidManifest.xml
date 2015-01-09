@@ -14,14 +14,15 @@
             android:label="@string/screen1" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.rupantalwar.prolific.AddBook"
             android:label="@string/screen3" >
-
-            </activity>
+        </activity>
+        <activity android:name="com.rupantalwar.prolific.BookDetails"
+            android:label="@string/screen3" >
+        </activity>
     </application>
 
 </manifest>

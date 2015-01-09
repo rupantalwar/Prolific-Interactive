@@ -4,20 +4,27 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.security.auth.callback.Callback;
 
+import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -31,51 +38,82 @@ public class Screen1 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen1);
-
         booksList = (ListView) findViewById(R.id.bookList);
 
-        String[] values = new String[] { "Book1", "Book2", "Book3",
-                "Book4", "Book5"
-                 };
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-        booksList.setAdapter(adapter);
+        RestClient.get().listBooks(new Callback<List<Result>>() {
 
+            @Override
+            public void success(final List<Result> result, Response response) {
+                // success!
+                Log.d("App", "In success");
+                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                fillList(result);
 
-       // load(getApp());
+                booksList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        Intent i = new Intent(Screen1.this, BookDetails.class);
 
-    }
+                        String bookName = ((TextView) view.findViewById(R.id.bookLabel)).getText().toString();
+                        Log.d("App","bookName:"+bookName);
 
-    private MyService getApp()
-    {
-        return (MyService) getApplication();
-    }
+                        Map<String,Integer> map = new HashMap<String,Integer>();
+                        int ide=0;
+                        String title=null;
+                        for(int j=0;j<result.size();j++){
+                            ide=result.get(j).getId();
+                            title=result.get(j).getTitle();
+                            map.put(title,ide);
+                        }
+                        Log.d("App","Hash map values: "+map);
 
-  /*  public void load(MyService ser){
+                        int bookId=0;
+                        for (Map.Entry<String, Integer> entry : map.entrySet()){
+                            if(entry.getKey().contains(bookName)){
+                                bookId=entry.getValue();
+                            }
+                        }
 
-    MyApi myApi= ser.getBooks();
-        myApi.listBooks(new Callback<List<String>>() {
-            @Override public void success(List<String> books, Response response) {
-                String[] bookArr = new String[books.size()];
-                bookArr = books.toArray(bookArr);
-                String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X"
-                };
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                        android.R.layout.simple_list_item_1, android.R.id.text1, values);
-                booksList.setAdapter(adapter);
+                        i.putExtra("id", bookId);
+                        startActivity(i);
+                    }
+                });
 
             }
 
-            @Override public void failure(RetrofitError retrofitError) {
-
-
-
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("App","ERROR");
+                // something went wrong
             }
         });
 
-    }*/
+
+
+
+
+    }
+
+    public void fillList(List<Result> result){
+
+        MyAdapter adapter = new MyAdapter(this, generateData(result));
+        booksList.setAdapter(adapter);
+
+    }
+
+    private ArrayList<Item> generateData(List<Result> res){
+
+        ArrayList<Item> items = new ArrayList<Item>();
+        for (int i=0;i<res.size();i++) {
+            items.add(new Item(res.get(i).getTitle(),res.get(i).getAuthor()));
+
+        }
+        return items;
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,10 +149,6 @@ public class Screen1 extends Activity {
         Intent i = new Intent(Screen1.this, AddBook.class);
         startActivity(i);
     }
-
-
-
-
 
 
 }
