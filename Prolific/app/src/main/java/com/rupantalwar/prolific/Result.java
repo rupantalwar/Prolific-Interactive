@@ -14,11 +14,14 @@ public class Result {
     public String url;
     public int id;
 
-    public Result(String title, String author, String publisher, String categories) {
+    public Result(String title, String author, String publisher, String categories,String lastCheckedOut,String lastCheckedOutBy) {
         this.title=title;
         this.author=author;
         this.publisher=publisher;
         this.categories=categories;
+        this.lastCheckedOut=lastCheckedOut;
+        this.lastCheckedOutBy=lastCheckedOutBy;
+
     }
 
 

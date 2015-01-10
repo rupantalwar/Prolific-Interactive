@@ -23,6 +23,9 @@
         <activity android:name="com.rupantalwar.prolific.BookDetails"
             android:label="@string/screen3" >
         </activity>
+        <activity android:name="com.rupantalwar.prolific.AddCustomBook"
+            android:label="Edit Book Details" >
+        </activity>
     </application>
 
 </manifest>

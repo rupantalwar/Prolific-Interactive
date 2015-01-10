@@ -10,14 +10,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -37,6 +39,8 @@ public class BookDetails extends Activity{
     private TextView book_details_tag;
     private TextView book_details_date;
 
+    private ShareActionProvider provider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,17 +56,15 @@ public class BookDetails extends Activity{
         book_details_chk = (TextView) findViewById(R.id.book_details_chk);
         book_details_date = (TextView) findViewById(R.id.book_details_date);
 
-
-
         Intent intent = getIntent();
-        int id=intent.getIntExtra("id",0);
+        final int ide=intent.getIntExtra("id",0);
 
-        RestClient.get().getBook(id,new Callback<Result>() {
+        RestClient.get().getBook(ide,new Callback<Result>() {
 
             @Override
             public void success(Result result, Response response) {
                 // success!
-                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                Log.d("App","Success:Book Details");
                 displayBook(result);
 
             }
@@ -109,6 +111,8 @@ public class BookDetails extends Activity{
                 final EditText userInput = (EditText) promptsView
                         .findViewById(R.id.editTextDialogUserInput);
 
+                Log.d("App","userInput:"+userInput.getText().toString());
+
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
@@ -119,7 +123,14 @@ public class BookDetails extends Activity{
                                         // edit text
                                         //userInput.getText();
 
-                                        RestClient.get().updateBook(id,new Callback<Result>() {
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                        String currentDateandTime = sdf.format(new Date());
+                                        Result result=new Result(book_details_title.getText().toString(),book_details_author.getText().toString(),book_details_pub.getText().toString(),book_details_tag.getText().toString(),currentDateandTime,userInput.getText().toString());
+
+                                        Intent intent = getIntent();
+                                        final int ide=intent.getIntExtra("id",0);
+
+                                        RestClient.get().updateBook(ide,result,new Callback<Result>() {
 
                                             @Override
                                             public void success(Result result, Response response) {
@@ -146,14 +157,8 @@ public class BookDetails extends Activity{
                                     }
                                 });
 
-                // create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
                 alertDialog.show();
-
-
-
 
             }
         });
@@ -165,8 +170,58 @@ public class BookDetails extends Activity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_books, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_book_details, menu);
+
+        provider = (ShareActionProvider) menu.findItem(R.id.menu_share).getActionProvider();
+
+        provider.setShareIntent(getDefaultShareIntent());
+
+        return super.onCreateOptionsMenu(menu);
     }
+
+        /** Returns a share intent */
+        private Intent getDefaultShareIntent(){
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "SUBJECT");
+            intent.putExtra(Intent.EXTRA_TEXT,"Extra Text");
+            return intent;
+        }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(this, Screen1.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+
+            case R.id.edit:
+                Intent intent1 = getIntent();
+                final int ide=intent1.getIntExtra("id",0);
+                Intent intent2 = new Intent(BookDetails.this, AddCustomBook.class);
+                Bundle bundle = new Bundle();
+                Log.d("BookDetails",book_details_title.getText().toString());
+                Log.d("BookDetails",book_details_author.getText().toString());
+                Log.d("BookDetails",book_details_pub.getText().toString());
+                Log.d("BookDetails",book_details_tag.getText().toString());
+
+                bundle.putString("title",book_details_title.getText().toString());
+                bundle.putString("author",book_details_author.getText().toString());
+                bundle.putString("publisher",book_details_pub.getText().toString());
+                bundle.putString("categories",book_details_tag.getText().toString());
+                bundle.putInt("id",ide);
+                intent2.putExtras(bundle);
+                startActivity(intent2);
+                break;
+
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

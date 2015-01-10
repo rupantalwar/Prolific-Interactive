@@ -6,7 +6,7 @@
     <string name="screen3">Detail</string>
 
     <string name="action_add">Add</string>
-    <string name="action_seed">Seed</string>
+    <string name="action_delete">Delete All</string>
     <string name="action_done">Done</string>
 
 
