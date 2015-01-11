@@ -1,3 +1,14 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//  BookDetails.java - Prolific                                                           //
+//  (Source file containing BookDetails class used for displaying a book's details)       //
+//                                                                                        //
+//  Language:        Java                                                                 //
+//  Platform:        Android SDK                                                          //
+//  Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860       //
+//  Created On:      1/7/2015                                                             //
+////////////////////////////////////////////////////////////////////////////////////////////
+
 package com.rupantalwar.prolific;
 
 import android.app.ActionBar;
@@ -26,11 +37,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-/**
- * Created by rupantalwar on 1/7/15.
- */
+
 public class BookDetails extends Activity{
 
+    //Declaring text view fields and button from the layout book_details
     private Button checkout;
     private TextView book_details_title;
     private TextView book_details_author;
@@ -46,9 +56,12 @@ public class BookDetails extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_details);
 
+        //Setting up "up" carat button/home/back button on the Action bar
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
+        //Co-relating layout fields to TextView object types
         book_details_title = (TextView) findViewById(R.id.book_details_title);
         book_details_author = (TextView) findViewById(R.id.book_details_author);
         book_details_pub = (TextView) findViewById(R.id.book_details_pub);
@@ -56,9 +69,13 @@ public class BookDetails extends Activity{
         book_details_chk = (TextView) findViewById(R.id.book_details_chk);
         book_details_date = (TextView) findViewById(R.id.book_details_date);
 
+
+        //Getting parameters from the previous activity
         Intent intent = getIntent();
         final int ide=intent.getIntExtra("id",0);
 
+
+        //Calling RestClient , that would call API to make HTTP GET request to the server
         RestClient.get().getBook(ide,new Callback<Result>() {
 
             @Override
@@ -82,6 +99,7 @@ public class BookDetails extends Activity{
 
     public void displayBook(Result result)
     {
+        //setting the values fetched from the server into text fields of TextView
         book_details_title.setText(result.getTitle());
         book_details_author.setText(result.getAuthor());
         book_details_pub.setText(result.getPublisher());
@@ -91,21 +109,21 @@ public class BookDetails extends Activity{
 
     }
 
-
+    //Handling the Checkout button
     public void addListenerOnButton() {
         final Context context = this;
         checkout = (Button) findViewById(R.id.checkout);
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                // get dialog_box.xml view
+
+                //Displaying an alert dialog box with edit text field, to enter user's name
                 LayoutInflater li = LayoutInflater.from(context);
                 View promptsView = li.inflate(R.layout.dialog_box, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
 
-                // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
                 final EditText userInput = (EditText) promptsView
@@ -113,16 +131,15 @@ public class BookDetails extends Activity{
 
                 Log.d("App","userInput:"+userInput.getText().toString());
 
-                // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
-                                        // get user input and set it to result
-                                        // edit text
-                                        //userInput.getText();
 
+                                        // got user input and set it to result
+
+                                        //fetching date in "yyyy-MM-dd HH:mm:ss" format
                                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                         String currentDateandTime = sdf.format(new Date());
                                         Result result=new Result(book_details_title.getText().toString(),book_details_author.getText().toString(),book_details_pub.getText().toString(),book_details_tag.getText().toString(),currentDateandTime,userInput.getText().toString());
@@ -130,12 +147,13 @@ public class BookDetails extends Activity{
                                         Intent intent = getIntent();
                                         final int ide=intent.getIntExtra("id",0);
 
+                                        //Calling RestClient , that would call API to make HTTP PUT request to the server
                                         RestClient.get().updateBook(ide,result,new Callback<Result>() {
 
                                             @Override
                                             public void success(Result result, Response response) {
                                                 // success!
-                                                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getApplicationContext(), "Book Successfully Checked Out", Toast.LENGTH_LONG).show();
                                                 displayBook(result);
 
                                             }
@@ -172,14 +190,13 @@ public class BookDetails extends Activity{
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_book_details, menu);
 
+        //Setting up the Share Action Provider
         provider = (ShareActionProvider) menu.findItem(R.id.menu_share).getActionProvider();
-
         provider.setShareIntent(getDefaultShareIntent());
-
         return super.onCreateOptionsMenu(menu);
     }
 
-        /** Returns a share intent */
+        //Returns a share intent
         private Intent getDefaultShareIntent(){
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
@@ -202,18 +219,16 @@ public class BookDetails extends Activity{
                 Intent intent1 = getIntent();
                 final int ide=intent1.getIntExtra("id",0);
                 Intent intent2 = new Intent(BookDetails.this, AddCustomBook.class);
-                Bundle bundle = new Bundle();
-                Log.d("BookDetails",book_details_title.getText().toString());
-                Log.d("BookDetails",book_details_author.getText().toString());
-                Log.d("BookDetails",book_details_pub.getText().toString());
-                Log.d("BookDetails",book_details_tag.getText().toString());
 
+                //Passing book details values to the next activity in the form of Bundle
+                Bundle bundle = new Bundle();
                 bundle.putString("title",book_details_title.getText().toString());
                 bundle.putString("author",book_details_author.getText().toString());
                 bundle.putString("publisher",book_details_pub.getText().toString());
                 bundle.putString("categories",book_details_tag.getText().toString());
                 bundle.putInt("id",ide);
                 intent2.putExtras(bundle);
+
                 startActivity(intent2);
                 break;
 

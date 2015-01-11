@@ -11,20 +11,24 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.rupantalwar.prolific.Screen1"
-            android:label="@string/screen1" >
+            android:label="@string/screen1"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.rupantalwar.prolific.AddBook"
-            android:label="@string/screen3" >
+            android:label="@string/screen3"
+            android:screenOrientation="portrait">
         </activity>
         <activity android:name="com.rupantalwar.prolific.BookDetails"
-            android:label="@string/screen3" >
+            android:label="@string/screen3"
+            android:screenOrientation="portrait">
         </activity>
         <activity android:name="com.rupantalwar.prolific.AddCustomBook"
-            android:label="Edit Book Details" >
+            android:label="Edit Book Details"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

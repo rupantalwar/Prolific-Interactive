@@ -1,3 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    book_details.xml - Prolific
+
+    Language:        Java
+    Platform:        Android SDK
+    Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860
+    Created On:      1/7/2015
+-->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,66 +29,124 @@
          />
 
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/book_details_title"
-        android:layout_marginTop="20dp"
-        android:lines="2"
         android:id="@+id/book_details_author"
+        android:layout_marginBottom="5dp"
         android:text="Author"
         android:autoLink="all"
         android:fontFamily="Arial"
         android:typeface="serif"
-        android:textSize="10sp" />
+        android:textSize="18sp" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/book_details_author"
-        android:lines="2"
-        android:id="@+id/book_details_pub"
-        android:text="Publisher"
-        android:autoLink="all"
-        android:fontFamily="Arial"
-        android:typeface="serif"
-        android:textSize="10sp" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/book_details_pub"
-        android:lines="2"
-        android:id="@+id/book_details_tag"
-        android:text="Tags"
-        android:autoLink="all"
-        android:fontFamily="Arial"
-        android:typeface="serif"
-        android:textSize="10sp" />
+    <LinearLayout android:id="@+id/linearLayout1"  android:layout_height="wrap_content"  android:layout_below="@id/book_details_author"       android:layout_marginTop="3dp"
+        android:layout_width="fill_parent" android:layout_gravity="bottom" android:gravity="bottom">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/book_details_tag"
-        android:lines="2"
-        android:id="@+id/book_details_chk"
+        android:id="@+id/publisher"
+        android:text="Publisher: "
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/book_details_pub"
+        android:text="---publisher---"
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_below="@id/linearLayout1"  android:layout_width="fill_parent" android:layout_gravity="bottom" android:gravity="bottom">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tag"
+            android:text="Tags: "
+            android:autoLink="all"
+            android:fontFamily="Arial"
+            android:typeface="serif"
+            android:textSize="12sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/book_details_tag"
+        android:text="---tags---"
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:layout_below="@id/linearLayout2" android:layout_width="fill_parent" android:layout_gravity="bottom" android:gravity="bottom">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chk"
         android:text="Last Checked Out:"
         android:autoLink="all"
         android:fontFamily="Arial"
         android:typeface="serif"
-        android:textSize="10sp" />
+        android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_below="@id/linearLayout4" android:layout_width="fill_parent" android:layout_gravity="bottom" android:gravity="bottom">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/book_details_chk"
-        android:layout_alignBaseline="@id/book_details_chk"
-        android:lines="2"
-        android:id="@+id/book_details_date"
-        android:text="  \@Date:"
+        android:adjustViewBounds="true"
+        android:layout_below="@+id/book_details_tag"
+        android:id="@+id/book_details_chk"
+        android:text="---Last Checked Out---"
         android:autoLink="all"
         android:fontFamily="Arial"
         android:typeface="serif"
-        android:textSize="10sp" />
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:id="@+id/at_sign"
+        android:text="   @   "
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:id="@+id/book_details_date"
+        android:text="  Date:"
+        android:autoLink="all"
+        android:fontFamily="Arial"
+        android:typeface="serif"
+        android:textSize="12sp" />
+
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/checkout"
@@ -87,7 +155,7 @@
         android:text="Checkout"
         android:fontFamily="Arial"
         android:textColor="@color/black"
-        android:layout_below="@+id/book_details_chk"
+        android:layout_below="@+id/linearLayout3"
          />
 
 

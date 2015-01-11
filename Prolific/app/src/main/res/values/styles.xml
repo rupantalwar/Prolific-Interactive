@@ -1,3 +1,12 @@
+<!--
+    styles.xml - Prolific
+
+    Language:        Java
+    Platform:        Android SDK
+    Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860
+    Created On:      1/7/2015
+-->
+
 <resources>
 
     <!-- Base application theme. -->
@@ -7,6 +16,9 @@
 
     <color name="black">#000000</color>
     <color name="grey">#6B6B6B</color>
+    <color name="blue">#3090C7</color>
+
+
 
 
 </resources>

@@ -1,8 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//  Result.java - Prolific                                                                //
+//  (Source file containing Result class(POJO) used for containing  book's parameters     //
+//   in a single listView item)                                                           //
+//                                                                                        //
+//  Language:        Java                                                                 //
+//  Platform:        Android SDK                                                          //
+//  Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860       //
+//  Created On:      1/7/2015                                                             //
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
 package com.rupantalwar.prolific;
 
-/**
- * Created by rupantalwar on 1/7/15.
- */
 public class Result {
 
     public String author;

@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    strings.xml - Prolific
+
+    Language:        Java
+    Platform:        Android SDK
+    Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860
+    Created On:      1/7/2015
+-->
+
 <resources>
 
     <string name="app_name">Prolific</string>
@@ -8,8 +17,6 @@
     <string name="action_add">Add</string>
     <string name="action_delete">Delete All</string>
     <string name="action_done">Done</string>
-
-
 
 
 </resources>

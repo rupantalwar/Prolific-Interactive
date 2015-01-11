@@ -1,8 +1,17 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//  MyAdapter.java - Prolific                                                             //
+//  (Source file containing MyAdapter class used as a custom adapter for listView)         //
+//                                                                                        //
+//  Language:        Java                                                                 //
+//  Platform:        Android SDK                                                          //
+//  Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860       //
+//  Created On:      1/7/2015                                                             //
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
 package com.rupantalwar.prolific;
 
-/**
- * Created by rupantalwar on 1/8/15.
- */
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,22 +37,20 @@ public class MyAdapter extends ArrayAdapter<Item> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        // 1. Create inflater
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        // 2. Get rowView from inflater
+        //Getting rowView from inflater
         View rowView = inflater.inflate(R.layout.list_books, parent, false);
 
-        // 3. Get the two text view from the rowView
+        //Getting the two text view from the rowView
         TextView labelView = (TextView) rowView.findViewById(R.id.bookLabel);
         TextView valueView = (TextView) rowView.findViewById(R.id.value);
 
-        // 4. Set the text for textView
+        //Setting the text for textView
         labelView.setText(itemsArrayList.get(position).getTitle());
         valueView.setText(itemsArrayList.get(position).getDescription());
 
-        // 5. retrn rowView
         return rowView;
     }
 }

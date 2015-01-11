@@ -1,8 +1,17 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//  Item.java - Prolific                                                                  //
+//  (Source file containing Item class(POJO) used for displaying book's title and author  //
+//   in a single listView item)                                                           //
+//                                                                                        //
+//  Language:        Java                                                                 //
+//  Platform:        Android SDK                                                          //
+//  Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860       //
+//  Created On:      1/7/2015                                                             //
+////////////////////////////////////////////////////////////////////////////////////////////
+
 package com.rupantalwar.prolific;
 
-/**
- * Created by rupantalwar on 1/8/15.
- */
 public class Item {
 
     private String title;
@@ -13,7 +22,7 @@ public class Item {
         this.title = title;
         this.description = description;
     }
-    // getters and setters...
+
 
 
     public String getTitle() {

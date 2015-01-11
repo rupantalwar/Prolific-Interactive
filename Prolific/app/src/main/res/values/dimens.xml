@@ -1,3 +1,12 @@
+<!--
+    dimens.xml - Prolific
+
+    Language:        Java
+    Platform:        Android SDK
+    Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860
+    Created On:      1/7/2015
+-->
+
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>

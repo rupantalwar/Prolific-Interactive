@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    dialog_box.xml - Prolific
+
+    Language:        Java
+    Platform:        Android SDK
+    Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860
+    Created On:      1/7/2015
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_root"
     android:layout_width="fill_parent"

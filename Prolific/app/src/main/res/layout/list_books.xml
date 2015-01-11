@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    list_books.xml - Prolific
+
+    Language:        Java
+    Platform:        Android SDK
+    Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860
+    Created On:      1/7/2015
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@drawable/list_type">
 
         <TextView
             android:id="@+id/bookLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:paddingLeft="5dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:paddingTop="5dp"
             android:textColor="@color/black">
         </TextView>
 
@@ -19,7 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/bookLabel"
             android:textSize="12sp"
-            android:paddingLeft="5dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:paddingBottom="5dp"
             android:textColor="@color/grey"
             >
         </TextView>

@@ -1,8 +1,17 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//  ScreenDetector.java - Prolific                                                        //
+//  (Source file containing ScreenDetector class used for defining custom swipe gesture   //
+//   in a single listView item)                                                           //
+//                                                                                        //
+//  Language:        Java                                                                 //
+//  Platform:        Android SDK                                                          //
+//  Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860       //
+//  Created On:      1/9/2015                                                             //
+////////////////////////////////////////////////////////////////////////////////////////////
+
 package com.rupantalwar.prolific;
 
-/**
- * Created by rupantalwar on 1/9/15.
- */
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;

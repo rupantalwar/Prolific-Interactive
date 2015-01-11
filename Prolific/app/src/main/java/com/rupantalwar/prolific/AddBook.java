@@ -1,3 +1,15 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//  AddBook.java - Prolific                                                               //
+//  (Source file containing AddBook class used for adding Book details to the server      //
+//                                                                                        //
+//  Language:        Java                                                                 //
+//  Platform:        Android SDK                                                          //
+//  Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860       //
+//  Created On:      1/7/2015                                                             //
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
 package com.rupantalwar.prolific;
 
 import android.app.ActionBar;
@@ -9,7 +21,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,12 +34,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-/**
- * Created by rupantalwar on 1/7/15.
- */
 public class AddBook extends Activity{
 
 
+    //Declaring edit text fields and button from the layout add_books
     private Button submit;
     private EditText editbook;
     private EditText editAuth;
@@ -40,9 +49,12 @@ public class AddBook extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_books);
+
+        //Setting up "up" carat button/home/back button on the Action bar
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Co-relating layout fields to EditText object types
         editbook = (EditText) findViewById(R.id.editbook);
         editAuth = (EditText) findViewById(R.id.editAuth);
         editPub = (EditText) findViewById(R.id.editPub);
@@ -62,6 +74,7 @@ public class AddBook extends Activity{
             public void onClick(View arg0) {
 
 
+                //Check for all required edit text fields
                 if(editbook.getText().toString().length()== 0 || editAuth.getText().toString().length()== 0 || editPub.getText().toString().length()== 0 || editCat.getText().toString().length()== 0 )
                 {
                     final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddBook.this);
@@ -72,6 +85,7 @@ public class AddBook extends Activity{
                     final AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
 
+                    //Making the Alert dialog box appear for 3000ms or 3 seconds
                     final Handler handler  = new Handler();
                     final Runnable runnable = new Runnable() {
                         @Override
@@ -96,6 +110,7 @@ public class AddBook extends Activity{
                 {
                 Result result= new Result(editbook.getText().toString(),editAuth.getText().toString(),editPub.getText().toString(),editCat.getText().toString(),null,null);
 
+                //Calling RestClient , that would call API to make HTTP POST request to the server
                 RestClient.get().addBook(result, new Callback<Result>() {
 
                     @Override
@@ -119,9 +134,7 @@ public class AddBook extends Activity{
 
     }
 
-    //------------------------------------------------------------------------------
     // Clear the add book form
-    //------------------------------------------------------------------------------
     private void clearForm(ViewGroup group)
     {
         for (int i = 0, count = group.getChildCount(); i < count; ++i) {
@@ -141,7 +154,7 @@ public class AddBook extends Activity{
         return true;
     }
 
-
+    //Handling "up" carat and "done" action bar button clicks
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -159,6 +172,7 @@ public class AddBook extends Activity{
         return super.onOptionsItemSelected(item);
     }
 
+
     private void backSure(){
         if(editbook.getText().toString().length()!= 0 || editAuth.getText().toString().length()!= 0 || editPub.getText().toString().length()!= 0 || editCat.getText().toString().length()!= 0  )
         {
@@ -169,6 +183,7 @@ public class AddBook extends Activity{
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            //If clicked yes, start Screen1 activity
                             Intent intent = new Intent(AddBook.this, Screen1.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
@@ -196,6 +211,7 @@ public class AddBook extends Activity{
 
 
 
+    //Handling Back/Return Soft touch key
     @Override
     public void onBackPressed() {
 
@@ -208,6 +224,7 @@ public class AddBook extends Activity{
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            //If clicked yes, start Screen1 activity
                             Intent intent = new Intent(AddBook.this, Screen1.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

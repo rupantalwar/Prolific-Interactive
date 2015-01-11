@@ -1,3 +1,16 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//  MyApi.java - Prolific                                                                 //
+//  (Source file containing MyApi Interface used to make HTTP REQUEST calls to            //
+//   the server employing RETROFIT api)                                                   //
+//                                                                                        //
+//  Language:        Java                                                                 //
+//  Platform:        Android SDK                                                          //
+//  Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860       //
+//  Created On:      1/7/2015                                                             //
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
 package com.rupantalwar.prolific;
 
 import java.util.List;
@@ -10,9 +23,7 @@ import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
 
-/**
- * Created by rupantalwar on 1/7/15.
- */
+
 public interface MyApi {
 
     @GET("/books")

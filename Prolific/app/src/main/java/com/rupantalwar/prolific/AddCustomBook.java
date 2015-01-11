@@ -1,20 +1,26 @@
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//  AddCustomBook.java - Prolific                                                         //
+//  (Source file containing AddCustomBook class used for editing Book details)            //
+//                                                                                        //
+//  Language:        Java                                                                 //
+//  Platform:        Android SDK                                                          //
+//  Author:          Rupan Talwar, Email:rupantalwar@gmail.com, Phone: 315 751-2860       //
+//  Created On:      1/9/2015                                                             //
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
 package com.rupantalwar.prolific;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,12 +33,11 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-/**
- * Created by rupantalwar on 1/7/15.
- */
+
 public class AddCustomBook extends Activity{
 
 
+    //Declaring edit text fields and button from the layout add_custom_books
     private Button update;
     private EditText editcbook;
     private EditText editcAuth;
@@ -46,29 +51,26 @@ public class AddCustomBook extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_custom_books);
 
-
+        //Getting parameters from the previous activity in the form of Bundle
         Bundle bundle = getIntent().getExtras();
         String title = bundle.getString("title");
         String author = bundle.getString("author");
         String publisher = bundle.getString("publisher");
         String categories = bundle.getString("categories");
 
-        Log.d("APP",title);
-        Log.d("APP",author);
-        Log.d("APP",publisher);
-        Log.d("APP",categories);
-
+        //Co-relating layout fields to EditText object types
         editcbook = (EditText) findViewById(R.id.editcbook);
         editcAuth = (EditText) findViewById(R.id.editcAuth);
         editcPub = (EditText) findViewById(R.id.editcPub);
         editcCat = (EditText) findViewById(R.id.editcCat);
         editcYourName = (EditText) findViewById(R.id.editcYourName);
 
-
+        //Setting values of book details into edit text fields as hints
         editcbook.setHint(title);
         editcAuth.setHint(author);
         editcPub.setHint(publisher);
         editcCat.setHint(categories);
+
         View v= (View) findViewById(R.id.addCustomBooks);
         v.invalidate();
 
@@ -85,16 +87,17 @@ public class AddCustomBook extends Activity{
             @Override
             public void onClick(View arg0) {
 
-
+                //Check for required "You Name" edit text field
                 if (editcYourName.getText().toString().length() == 0) {
                     final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddCustomBook.this);
                     alertDialogBuilder.setTitle("Error");
                     alertDialogBuilder
-                            .setMessage("Please enter all fields")
+                            .setMessage("Please enter Your Name")
                             .setCancelable(false);
                     final AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
 
+                    //Making the Alert dialog box appear for 3000ms or 3 seconds
                     final Handler handler = new Handler();
                     final Runnable runnable = new Runnable() {
                         @Override
@@ -128,7 +131,8 @@ public class AddCustomBook extends Activity{
                     String cPublisher=null;
                     String cCategories=null;
 
-
+                    //Setting values entered in edit text fields into the book details,
+                    // if nothing entered, the existing book details values are passed to the server
                     if(editcbook.getText().toString().length()==0)
                         cTitle=title;
                     else
@@ -152,6 +156,7 @@ public class AddCustomBook extends Activity{
                     Result result = new Result(cTitle, cAuthor, cPublisher,cCategories, currentDateandTime, editcYourName.getText().toString());
                     int id = bundle.getInt("id");
 
+                    //Calling RestClient , that would call API to make HTTP PUT request to the server
                     RestClient.get().updateBook(id, result, new Callback<Result>() {
 
                         @Override
@@ -178,17 +183,7 @@ public class AddCustomBook extends Activity{
     }
 
 
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_books, menu);
-        return true;
-    }
-
-
-
+    //Handling Back/Return Soft touch key
     @Override
     public void onBackPressed() {
 
@@ -201,6 +196,7 @@ public class AddCustomBook extends Activity{
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            //If clicked yes, start Screen1 activity
                             Intent intent = new Intent(AddCustomBook.this, Screen1.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
